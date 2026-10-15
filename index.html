@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dugi's Burger – smash burgery, které si zapamatuješ</title>
+  <meta name="description" content="Dugi's Burger – vyzrálé hovězí, domácí máslová bulka a omáčky z vlastní kuchyně. Menu, rezervace a kontakt.">
+  <link rel="icon" href="img/logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=3">
+</head>
+<body>
+
+  <!-- ===== NAVIGACE ===== -->
+  <header class="nav" id="nav">
+    <a href="#uvod" class="nav__brand" aria-label="Dugi's Burger – úvod">
+      <img src="img/logo.jpg" alt="Logo Dugi's Burger" width="44" height="44">
+      <span>Dugi's</span>
+    </a>
+    <button class="nav__toggle" id="navToggle" aria-label="Otevřít menu" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+    <nav class="nav__links" id="navLinks">
+      <a href="#o-nas">O nás</a>
+      <a href="#menu">Menu</a>
+      <a href="#kontakt">Kontakt</a>
+      <a href="#rezervace" class="nav__cta">Rezervovat stůl</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== ÚVOD ===== -->
+    <section class="hero" id="uvod">
+      <div class="hero__grain" aria-hidden="true"></div>
+      <div class="hero__inner">
+        <p class="hero__kicker reveal">Smash burgery · Domácí omáčky · Točené pivo</p>
+        <h1 class="hero__title">
+          <span class="line reveal">Žádné</span>
+          <span class="line reveal"><em>kompromisy.</em></span>
+          <span class="line line--outline reveal">Jen burger.</span>
+        </h1>
+        <div class="hero__bottom reveal">
+          <p class="hero__lead">Vyzrálé hovězí rozmáčknuté na rozpálené plotně, domácí máslová bulka a omáčky, které děláme sami. Každý den, bez zkratek.</p>
+          <div class="hero__actions">
+            <a href="#menu" class="btn btn--gold">Prohlédnout menu</a>
+            <a href="#rezervace" class="btn btn--ghost">Rezervovat stůl</a>
+          </div>
+        </div>
+      </div>
+      <img src="img/logo.jpg" alt="" class="hero__badge" aria-hidden="true">
+      <a href="#o-nas" class="hero__scroll" aria-label="Posunout dolů">Scroll</a>
+    </section>
+
+    <!-- ===== BĚŽÍCÍ PÁS ===== -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker__track">
+        <span>Dugi's Smash</span><i>✦</i><span>Triple Cheese</span><i>✦</i><span>Jalapeño</span><i>✦</i><span>Pepper King</span><i>✦</i><span>Hranolky na hovězím loji</span><i>✦</i><span>BBQ Smoky Mayo</span><i>✦</i>
+        <span>Dugi's Smash</span><i>✦</i><span>Triple Cheese</span><i>✦</i><span>Jalapeño</span><i>✦</i><span>Pepper King</span><i>✦</i><span>Hranolky na hovězím loji</span><i>✦</i><span>BBQ Smoky Mayo</span><i>✦</i>
+      </div>
+    </div>
+
+    <!-- ===== O NÁS ===== -->
+    <section class="about" id="o-nas">
+      <div class="section-label">01 — O nás</div>
+      <div class="about__grid">
+        <h2 class="about__title reveal">Burger podle nás<br>není <span class="gold">fast food.</span></h2>
+        <div class="about__text reveal">
+          <p class="about__big">Dugi's vznikl z jednoduché myšlenky: udělat burger, pro který se člověk rád vrátí. Žádné mražené placky, žádné omáčky z kanystru.</p>
+          <p>Hovězí maso necháváme vyzrát, každou placku rozmáčkneme přímo na plotně, aby měla křupavou kůrčičku a zůstala šťavnatá. Bulky jsou máslové, omáčky děláme každé ráno sami a hranolky smažíme na hovězím loji – tak, jak se to dělalo dřív.</p>
+          <p>Přijď na rychlý oběd, na večer s partou nebo si to vezmi s sebou. Hlavně přijď hladový.</p>
+        </div>
+      </div>
+
+      <ul class="facts">
+        <li class="fact reveal"><strong>100&nbsp;%</strong><span>vyzrálé hovězí maso</span></li>
+        <li class="fact reveal"><strong>0</strong><span>omáček z kanystru</span></li>
+        <li class="fact reveal"><strong>Lůj</strong><span>na kterém smažíme hranolky</span></li>
+        <li class="fact reveal"><strong>Denně</strong><span>čerstvá zelenina a bulky</span></li>
+      </ul>
+    </section>
+
+    <!-- ===== MENU ===== -->
+    <section class="menu" id="menu">
+      <div class="menu__head">
+        <div class="section-label">02 — Menu</div>
+        <h2 class="menu__title reveal">Co dnes <span class="gold">grilujeme?</span></h2>
+        <div class="tabs" role="tablist" aria-label="Kategorie menu">
+          <button class="tab is-active" role="tab" aria-selected="true" data-tab="burgery">Burgery</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="vege">Vege</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="prilohy">Přílohy &amp; omáčky</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="napoje">Nápoje</button>
+        </div>
+      </div>
+
+      <!-- Burgery -->
+      <div class="menu__panel is-active" id="burgery" role="tabpanel">
+        <article class="dish dish--hero">
+          <div class="dish__tag">Signature</div>
+          <div class="dish__row"><h3>Dugi's – Smash</h3><span class="dots"></span><span class="price">309,-</span></div>
+          <p>Vyzrálé hovězí maso, domácí máslová bulka, grilovaná slanina, cheddar, čerstvá cibulka, nakládaný okurek, dijonéza</p>
+        </article>
+        <article class="dish">
+          <div class="dish__row"><h3>Triple Cheese</h3><span class="dots"></span><span class="price">319,-</span></div>
+          <p>Vyzrálé hovězí maso, domácí máslová bulka, grilovaná slanina, maasdammer, raclette, cheddar, marinovaná červená cibulka, čerstvé rajče, polníček, BBQ smoky mayo</p>
+        </article>
+        <article class="dish">
+          <div class="dish__row"><h3>Jalapeño <small class="hot" title="Pálivé">🌶</small></h3><span class="dots"></span><span class="price">315,-</span></div>
+          <p>Vyzrálé hovězí maso, domácí máslová bulka, grilovaná slanina, cheddar, čerstvé rajče, čerstvý salát, červená cibulka, jalapeño papričky, BBQ smoky mayo</p>
+        </article>
+        <article class="dish">
+          <div class="dish__row"><h3>Pepper King</h3><span class="dots"></span><span class="price">329,-</span></div>
+          <p>Vyzrálé hovězí maso, domácí máslová bulka, grilovaná slanina, cheddar, raclette, baby špenát, čerstvé rajče, karamelizovaná cibulka na portském víně s nakládaným zeleným pepřem, dijonéza</p>
+        </article>
+        <article class="dish">
+          <div class="dish__row"><h3>Smažák se slaninou</h3><span class="dots"></span><span class="price">269,-</span></div>
+          <p>Sýr gouda, domácí máslová bulka, grilovaná slanina, čerstvé rajče, coleslaw z červeného zelí, polníček, červená cibulka, dijonéza</p>
+        </article>
+      </div>
+
+      <!-- Vege -->
+      <div class="menu__panel" id="vege" role="tabpanel" hidden>
+        <article class="dish dish--hero">
+          <div class="dish__tag">Bez masa</div>
+          <div class="dish__row"><h3>Smažák</h3><span class="dots"></span><span class="price">259,-</span></div>
+          <p>Sýr gouda, domácí máslová bulka, čerstvé rajče, coleslaw z červeného zelí, polníček, červená cibulka, dijonéza</p>
+        </article>
+      </div>
+
+      <!-- Přílohy a omáčky -->
+      <div class="menu__panel menu__panel--split" id="prilohy" role="tabpanel" hidden>
+        <div>
+          <h4 class="menu__sub">Přílohy</h4>
+          <article class="dish">
+            <div class="dish__row"><h3>Hranolky</h3><span class="dots"></span><span class="price">79,-</span></div>
+            <p>Smažené na hovězím loji</p>
+          </article>
+          <article class="dish">
+            <div class="dish__row"><h3>Coleslaw z červ. zelí</h3><span class="dots"></span><span class="price">69,-</span></div>
+            <p>Domácí coleslaw z červeného zelí</p>
+          </article>
+        </div>
+        <div>
+          <h4 class="menu__sub">Omáčky</h4>
+          <article class="dish">
+            <div class="dish__row"><h3>Dijonéza</h3><span class="dots"></span><span class="price">45,-</span></div>
+            <p>Domácí hořčično-medová omáčka z pasterizovaných vajec</p>
+          </article>
+          <article class="dish">
+            <div class="dish__row"><h3>BBQ Smoky Mayo</h3><span class="dots"></span><span class="price">45,-</span></div>
+            <p>Domácí BBQ omáčka z pasterizovaných vajec</p>
+          </article>
+        </div>
+      </div>
+
+      <!-- Nápoje -->
+      <div class="menu__panel menu__panel--drinks" id="napoje" role="tabpanel" hidden>
+        <div>
+          <h4 class="menu__sub">Nealko</h4>
+          <div class="drink"><span>Coca Cola 0,5 l</span><span class="dots"></span><span class="price">45,-</span></div>
+          <div class="drink"><span>Coca Cola Zero 0,5 l</span><span class="dots"></span><span class="price">45,-</span></div>
+          <div class="drink"><span>Kofola 0,5 l</span><span class="dots"></span><span class="price">45,-</span></div>
+          <div class="drink"><span>Sprite 0,5 l</span><span class="dots"></span><span class="price">45,-</span></div>
+          <div class="drink"><span>Fanta 0,5 l</span><span class="dots"></span><span class="price">45,-</span></div>
+          <div class="drink"><span>Vinea 0,5 l</span><span class="dots"></span><span class="price">45,-</span></div>
+          <div class="drink"><span>Neperlivá voda 0,5 l</span><span class="dots"></span><span class="price">39,-</span></div>
+          <div class="drink"><span>Jemně perlivá voda 0,5 l</span><span class="dots"></span><span class="price">39,-</span></div>
+          <div class="drink"><span>Cappy jahoda 0,33 l</span><span class="dots"></span><span class="price">45,-</span></div>
+        </div>
+        <div>
+          <h4 class="menu__sub">Pivo</h4>
+          <div class="drink"><span>Pilsner Urquell 12 0,5 l</span><span class="dots"></span><span class="price">65,-</span></div>
+          <div class="drink"><span>Radegast 10 0,5 l</span><span class="dots"></span><span class="price">49,-</span></div>
+          <div class="drink"><span>Tiger Originál 0,5 l</span><span class="dots"></span><span class="price">45,-</span></div>
+          <div class="drink"><span>Birell světlý 0,5 l</span><span class="dots"></span><span class="price">45,-</span></div>
+        </div>
+      </div>
+
+      <p class="menu__note">Informace o alergenech ti rádi sdělíme na místě.</p>
+    </section>
+
+    <!-- ===== REZERVACE ===== -->
+    <section class="reserve" id="rezervace">
+      <div class="reserve__intro">
+        <div class="section-label">03 — Rezervace</div>
+        <h2 class="reserve__title reveal">Drž nám<br><span class="gold">místo.</span></h2>
+        <p>Vyplň formulář a rezervaci ti co nejdřív potvrdíme telefonem nebo e-mailem. Pro skupiny nad 10 lidí nám radši zavolej.</p>
+      </div>
+
+      <form class="form form--reserve" id="reserveForm" action="send.php" method="post" novalidate>
+        <input type="hidden" name="type" value="reservation">
+        <div class="hp" aria-hidden="true"><label>Nevyplňovat <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+
+        <div class="field field--full">
+          <label for="r-name">Jméno a příjmení</label>
+          <input type="text" id="r-name" name="name" required autocomplete="name" placeholder="Jan Novák">
+        </div>
+        <div class="field">
+          <label for="r-phone">Telefon</label>
+          <input type="tel" id="r-phone" name="phone" required autocomplete="tel" placeholder="+420 777 123 456">
+        </div>
+        <div class="field">
+          <label for="r-email">E-mail</label>
+          <input type="email" id="r-email" name="email" required autocomplete="email" placeholder="jan@email.cz">
+        </div>
+
+        <div class="field field--full">
+          <span class="label">Počet lidí</span>
+          <div class="people" role="radiogroup" aria-label="Počet lidí">
+            <label><input type="radio" name="people" value="1"><span>1</span></label>
+            <label><input type="radio" name="people" value="2" checked><span>2</span></label>
+            <label><input type="radio" name="people" value="3"><span>3</span></label>
+            <label><input type="radio" name="people" value="4"><span>4</span></label>
+            <label><input type="radio" name="people" value="5"><span>5</span></label>
+            <label><input type="radio" name="people" value="6"><span>6</span></label>
+            <label><input type="radio" name="people" value="7-10"><span>7–10</span></label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="r-date">Datum</label>
+          <input type="date" id="r-date" name="date" required>
+        </div>
+        <div class="field">
+          <label for="r-time">Čas</label>
+          <select id="r-time" name="time" required>
+            <option value="" disabled selected>Vyber čas</option>
+          </select>
+        </div>
+        <div class="field field--full">
+          <label for="r-note">Poznámka <em>(nepovinné)</em></label>
+          <textarea id="r-note" name="message" rows="3" placeholder="Narozeniny, dětská židlička, místo u okna…"></textarea>
+        </div>
+
+        <div class="form__footer field--full">
+          <button type="submit" class="btn btn--gold btn--wide">Odeslat rezervaci</button>
+          <p class="form__status" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+    </section>
+
+    <!-- ===== KONTAKT ===== -->
+    <section class="contact" id="kontakt">
+      <div class="section-label">04 — Kontakt</div>
+      <h2 class="contact__title reveal">Kde nás <span class="gold">najdeš.</span></h2>
+
+      <div class="contact__grid">
+        <div class="info">
+          <div class="info__block">
+            <h3>Adresa</h3>
+            <!-- ZMĚŇ: adresa restaurace -->
+            <p>Ulice 123<br>760 01 Zlín</p>
+          </div>
+          <div class="info__block">
+            <h3>Otevírací doba</h3>
+            <!-- ZMĚŇ: otevírací doba (a uprav i OPEN_HOURS ve script.js) -->
+            <table class="hours">
+              <tr><td>Po – Čt</td><td>11:00 – 21:00</td></tr>
+              <tr><td>Pá – So</td><td>11:00 – 22:00</td></tr>
+              <tr><td>Ne</td><td>12:00 – 20:00</td></tr>
+            </table>
+          </div>
+          <div class="info__block">
+            <h3>Spojení</h3>
+            <!-- ZMĚŇ: telefon, e-mail, sociální sítě -->
+            <p>
+              <a href="tel:+420777123456">+420 777 123 456</a><br>
+              <a href="mailto:info@dugisburger.cz">info@dugisburger.cz</a><br>
+              <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook</a>
+            </p>
+          </div>
+        </div>
+
+        <div class="map">
+          <!-- ZMĚŇ: v adrese za "q=" nahraď "Zlín" přesnou adresou restaurace -->
+          <iframe
+            src="https://www.google.com/maps?q=Zl%C3%ADn&output=embed"
+            title="Mapa s polohou Dugi's Burger"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <div class="ask">
+        <div class="ask__intro">
+          <h3>Máš dotaz?</h3>
+          <p>Akce pro firmu, catering, alergeny nebo jen pochvala – napiš nám, odpovíme co nejdřív.</p>
+        </div>
+        <form class="form form--contact" id="contactForm" action="send.php" method="post" novalidate>
+          <input type="hidden" name="type" value="contact">
+          <div class="hp" aria-hidden="true"><label>Nevyplňovat <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+          <div class="field">
+            <label for="c-name">Jméno</label>
+            <input type="text" id="c-name" name="name" required autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="c-email">E-mail</label>
+            <input type="email" id="c-email" name="email" required autocomplete="email">
+          </div>
+          <div class="field field--full">
+            <label for="c-msg">Zpráva</label>
+            <textarea id="c-msg" name="message" rows="4" required></textarea>
+          </div>
+          <div class="form__footer field--full">
+            <button type="submit" class="btn btn--gold">Odeslat zprávu</button>
+            <p class="form__status" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer__big" aria-hidden="true">DUGI'S</div>
+    <div class="footer__row">
+      <span>© <span id="year"></span> Dugi's Burger</span>
+      <a href="#uvod">Zpět nahoru ↑</a>
+    </div>
+  </footer>
+
+  <script src="script.js?v=3"></script>
+</body>
+</html>
