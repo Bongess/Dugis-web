@@ -2,18 +2,49 @@
    Dugi's Burger – skripty
    ========================================================= */
 
-// Otevírací doba pro výběr času rezervace (0 = neděle … 6 = sobota)
-// ZMĚŇ podle skutečné otevírací doby. Poslední rezervace = hodinu před zavřením.
+// Otevírací doba pro výběr času rezervace (0 = neděle … 6 = sobota).
+// Každý den může mít víc otevřených úseků; chybějící den = zavřeno.
+// Poslední rezervace = hodinu před zavřením daného úseku.
+const DAY_HOURS = [['11:00', '14:00'], ['17:00', '20:00']];
 const OPEN_HOURS = {
-  0: ['12:00', '20:00'],
-  1: ['11:00', '21:00'],
-  2: ['11:00', '21:00'],
-  3: ['11:00', '21:00'],
-  4: ['11:00', '21:00'],
-  5: ['11:00', '22:00'],
-  6: ['11:00', '22:00'],
+  0: DAY_HOURS,
+  2: DAY_HOURS,
+  3: DAY_HOURS,
+  4: DAY_HOURS,
+  5: DAY_HOURS,
+  6: DAY_HOURS,
 };
 const SLOT_MINUTES = 30;
+
+/* ---------- Otevírací doba: dnešní den + otevřeno/zavřeno ---------- */
+(() => {
+  const DAY_ACC = ['v neděli', 'v pondělí', 'v úterý', 've středu', 've čtvrtek', 'v pátek', 'v sobotu'];
+  const min = t => { const [h, m] = t.split(':').map(Number); return h * 60 + m; };
+  const now = new Date();
+  const day = now.getDay();
+  const cur = now.getHours() * 60 + now.getMinutes();
+
+  document.querySelector(`#week [data-day="${day}"]`)?.classList.add('is-today');
+
+  const status = document.getElementById('openStatus');
+  if (!status) return;
+  const open = (OPEN_HOURS[day] || []).find(([f, t]) => cur >= min(f) && cur < min(t));
+  if (open) {
+    status.textContent = `Teď máme otevřeno · do ${open[1]}`;
+    status.classList.add('is-open');
+  } else {
+    for (let off = 0; off < 8; off++) {
+      const d = (day + off) % 7;
+      const next = (OPEN_HOURS[d] || []).find(([f]) => off > 0 || min(f) > cur);
+      if (next) {
+        const when = off === 0 ? 'dnes' : off === 1 ? 'zítra' : DAY_ACC[d];
+        status.textContent = `Teď máme zavřeno · otevíráme ${when} v ${next[0]}`;
+        break;
+      }
+    }
+  }
+  status.hidden = false;
+})();
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -137,14 +168,11 @@ function fillTimes() {
     timeSelect.options[0].disabled = true;
     return;
   }
-  let start = toMin(hours[0]);
-  const end = toMin(hours[1]) - 60;
-
   // Dnes nabízíme jen časy alespoň hodinu od teď
+  let earliest = 0;
   if (dateInput.value === isoDate(new Date())) {
     const now = new Date();
-    const earliest = now.getHours() * 60 + now.getMinutes() + 60;
-    start = Math.max(start, Math.ceil(earliest / SLOT_MINUTES) * SLOT_MINUTES);
+    earliest = Math.ceil((now.getHours() * 60 + now.getMinutes() + 60) / SLOT_MINUTES) * SLOT_MINUTES;
   }
 
   const placeholder = new Option('Vyber čas', '', true, true);
@@ -152,9 +180,12 @@ function fillTimes() {
   timeSelect.add(placeholder);
 
   let count = 0;
-  for (let m = start; m <= end; m += SLOT_MINUTES) {
-    timeSelect.add(new Option(toTime(m), toTime(m)));
-    count++;
+  for (const [from, to] of hours) {
+    const end = toMin(to) - 60;
+    for (let m = Math.max(toMin(from), earliest); m <= end; m += SLOT_MINUTES) {
+      timeSelect.add(new Option(toTime(m), toTime(m)));
+      count++;
+    }
   }
   if (!count) {
     timeSelect.innerHTML = '';

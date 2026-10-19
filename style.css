@@ -119,10 +119,23 @@ h1, h2, h3, h4 { margin: 0; }
   transition: background .3s, padding .3s, border-color .3s;
   border-bottom: 1px solid transparent;
 }
-.nav.is-scrolled {
+/* Pozadí s rozmazáním je na pseudo-elementu: backdrop-filter přímo na .nav
+   by z ní udělal containing block pro position:fixed a mobilní menu
+   by se po odscrollování smrsklo jen na výšku lišty. */
+.nav::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   background: rgba(13, 12, 11, .88);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  opacity: 0;
+  transition: opacity .3s;
+  pointer-events: none;
+}
+.nav.is-scrolled::before { opacity: 1; }
+.nav.is-scrolled {
   border-color: var(--line);
   padding-top: 10px;
   padding-bottom: 10px;
@@ -167,25 +180,57 @@ h1, h2, h3, h4 { margin: 0; }
   transition: background .25s, color .25s;
 }
 
+/* Hamburger jako malý burger: bulka se sezamem, placka, spodní bulka.
+   Po otevření placka zmizí a bulky se překříží do X. */
 .nav__toggle {
   display: none;
-  width: 44px; height: 44px;
-  background: none;
-  border: 0;
+  width: 46px; height: 46px;
+  padding: 0;
+  background: var(--coal);
+  border: 1px solid var(--gold);
+  border-radius: var(--radius);
+  box-shadow: 3px 3px 0 var(--gold-dark);
   cursor: pointer;
   position: relative;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .2s ease, box-shadow .2s ease;
 }
+.nav__toggle:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--gold-dark); }
 .nav__toggle span {
   position: absolute;
-  left: 10px; right: 10px;
-  height: 2px;
-  background: var(--gold);
-  transition: transform .3s, top .3s;
+  left: 11px; width: 22px;
+  transition: top .35s cubic-bezier(.6, -.4, .4, 1.4), height .35s, border-radius .35s,
+              transform .35s cubic-bezier(.6, -.4, .4, 1.4), opacity .25s;
 }
-.nav__toggle span:first-child { top: 17px; }
-.nav__toggle span:last-child { top: 25px; }
-.nav__toggle[aria-expanded="true"] span:first-child { top: 21px; transform: rotate(45deg); }
-.nav__toggle[aria-expanded="true"] span:last-child { top: 21px; transform: rotate(-45deg); }
+.nav__toggle span:nth-child(1) {
+  top: 12px; height: 8px;
+  border-radius: 11px 11px 2px 2px;
+  background:
+    radial-gradient(circle at 30% 55%, var(--black) 0 .9px, transparent 1.3px),
+    radial-gradient(circle at 52% 35%, var(--black) 0 .9px, transparent 1.3px),
+    radial-gradient(circle at 72% 60%, var(--black) 0 .9px, transparent 1.3px),
+    var(--gold-grad);
+}
+.nav__toggle span:nth-child(2) {
+  top: 23px; height: 3px;
+  left: 10px; width: 24px;
+  border-radius: 2px;
+  background: var(--cream);
+}
+.nav__toggle span:nth-child(3) {
+  top: 29px; height: 4px;
+  border-radius: 2px 2px 6px 6px;
+  background: var(--gold-grad);
+}
+.nav__toggle[aria-expanded="true"] span:nth-child(1),
+.nav__toggle[aria-expanded="true"] span:nth-child(3) {
+  top: 20.5px; height: 3px;
+  border-radius: 2px;
+  background: var(--gold);
+}
+.nav__toggle[aria-expanded="true"] span:nth-child(1) { transform: rotate(45deg); }
+.nav__toggle[aria-expanded="true"] span:nth-child(3) { transform: rotate(-45deg); }
+.nav__toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; transform: scaleX(0); }
 
 /* ---------- Hero ---------- */
 .hero {
@@ -651,9 +696,88 @@ h1, h2, h3, h4 { margin: 0; }
 .info__block p { margin: 0; font-size: 20px; line-height: 1.5; }
 .info__block a { text-decoration: none; border-bottom: 1px solid var(--line); transition: border-color .2s, color .2s; }
 .info__block a:hover { color: var(--gold); border-color: var(--gold); }
-.hours { border-collapse: collapse; font-size: 19px; }
-.hours td { padding: 4px 0; }
-.hours td:first-child { padding-right: 30px; color: var(--muted); }
+/* Otevírací doba: pás dnů v týdnu + dvě karty s časy */
+.week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  max-width: 380px;
+  margin: 0 0 14px;
+  padding: 0;
+  list-style: none;
+}
+.week li {
+  position: relative;
+  padding: 8px 0;
+  text-align: center;
+  font-family: var(--f-cond);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.week li.is-closed {
+  color: var(--muted);
+  opacity: .55;
+  text-decoration: line-through;
+  text-decoration-color: var(--red);
+  text-decoration-thickness: 2px;
+}
+.week li.is-today {
+  background: var(--gold-grad);
+  color: var(--black);
+  border-color: transparent;
+  box-shadow: 3px 3px 0 var(--gold-dark);
+  opacity: 1;
+}
+.week li.is-today.is-closed { background: var(--coal-2); color: var(--muted); box-shadow: 3px 3px 0 var(--red); }
+
+.slots { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-width: 380px; }
+.slot {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 14px;
+  background: var(--coal);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--gold);
+  border-radius: var(--radius);
+}
+.slot__label {
+  font-family: var(--f-cond);
+  font-size: 13px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.slot__time { font-family: var(--f-display); font-size: 21px; white-space: nowrap; }
+.info__block .hours__note { margin-top: 12px; font-size: 15px; color: var(--muted); }
+.info__block .hours__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  font-family: var(--f-cond);
+  font-size: 16px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.info__block .hours__status[hidden] { display: none; }
+.hours__status::before {
+  content: "";
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--muted);
+}
+.hours__status.is-open { color: var(--gold-light); }
+.hours__status.is-open::before { background: #6fcf6f; box-shadow: 0 0 0 0 rgba(111, 207, 111, .6); animation: pulse 2s infinite; }
+@keyframes pulse { to { box-shadow: 0 0 0 8px rgba(111, 207, 111, 0); } }
+@media (max-width: 400px) {
+  .slots { grid-template-columns: 1fr; }
+}
 
 .map {
   position: relative;
@@ -826,11 +950,7 @@ h1, h2, h3, h4 { margin: 0; }
   100% { transform: translateY(-2px) scale(1); }
 }
 
-/* Hamburger a „Zpět nahoru“ */
-.nav__toggle:hover span:first-child { transform: translateX(-4px); }
-.nav__toggle:hover span:last-child { transform: translateX(4px); }
-.nav__toggle[aria-expanded="true"]:hover span:first-child { transform: rotate(45deg); }
-.nav__toggle[aria-expanded="true"]:hover span:last-child { transform: rotate(-45deg); }
+/* „Zpět nahoru“ */
 .footer__row a { display: inline-block; transition: color .2s, transform .3s; }
 .footer__row a:hover { transform: translateY(-4px); }
 
@@ -943,7 +1063,7 @@ h1, h2, h3, h4 { margin: 0; }
    plovoucí logo, odhalování při scrollu). Hover efekty zůstávají. */
 @media (prefers-reduced-motion: reduce) {
   .ticker__track, .hero__badge, .hero__scroll::after, .gold, .hero__title em,
-  .hero .btn--gold::before { animation: none !important; }
+  .hero .btn--gold::before, .hours__status.is-open::before { animation: none !important; }
   .reveal { opacity: 1; transform: none; transition: none; }
   html { scroll-behavior: auto; }
 }

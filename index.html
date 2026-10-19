@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dugi's Burger – smash burgery, které si zapamatuješ</title>
   <meta name="description" content="Dugi's Burger – vyzrálé hovězí, domácí máslová bulka a omáčky z vlastní kuchyně. Menu, rezervace a kontakt.">
-  <link rel="icon" href="img/logo.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="img/favicon-192.png">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
@@ -20,7 +22,7 @@
       <span>Dugi's</span>
     </a>
     <button class="nav__toggle" id="navToggle" aria-label="Otevřít menu" aria-expanded="false">
-      <span></span><span></span>
+      <span></span><span></span><span></span>
     </button>
     <nav class="nav__links" id="navLinks">
       <a href="#o-nas">O nás</a>
@@ -36,7 +38,7 @@
     <section class="hero" id="uvod">
       <div class="hero__grain" aria-hidden="true"></div>
       <div class="hero__inner">
-        <p class="hero__kicker reveal">Smash burgery · Domácí omáčky · Točené pivo</p>
+        <p class="hero__kicker reveal">Burgery · Smash burgery · Domácí omáčky</p>
         <h1 class="hero__title">
           <span class="line reveal">Žádné</span>
           <span class="line reveal"><em>kompromisy.</em></span>
@@ -251,32 +253,43 @@
           <div class="info__block">
             <h3>Adresa</h3>
             <!-- ZMĚŇ: adresa restaurace -->
-            <p>Ulice 123<br>760 01 Zlín</p>
+            <p>Jana Antonína Bati 5645<br>760 01 Zlín 1</p>
           </div>
           <div class="info__block">
             <h3>Otevírací doba</h3>
             <!-- ZMĚŇ: otevírací doba (a uprav i OPEN_HOURS ve script.js) -->
-            <table class="hours">
-              <tr><td>Po – Čt</td><td>11:00 – 21:00</td></tr>
-              <tr><td>Pá – So</td><td>11:00 – 22:00</td></tr>
-              <tr><td>Ne</td><td>12:00 – 20:00</td></tr>
-            </table>
+            <div class="hours">
+              <ul class="week" id="week">
+                <li class="is-closed" data-day="1" title="Pondělí – zavřeno">Po</li>
+                <li data-day="2">Út</li>
+                <li data-day="3">St</li>
+                <li data-day="4">Čt</li>
+                <li data-day="5">Pá</li>
+                <li data-day="6">So</li>
+                <li data-day="0">Ne</li>
+              </ul>
+              <div class="slots">
+                <div class="slot"><span class="slot__label">Poledne</span><span class="slot__time">11:00 – 14:00</span></div>
+                <div class="slot"><span class="slot__label">Večer</span><span class="slot__time">17:00 – 20:00</span></div>
+              </div>
+              <p class="hours__note">Út – Ne · mezi 14:00 a 17:00 pauza · v pondělí zavřeno</p>
+              <p class="hours__status" id="openStatus" hidden></p>
+            </div>
           </div>
           <div class="info__block">
             <h3>Spojení</h3>
             <!-- ZMĚŇ: telefon, e-mail, sociální sítě -->
             <p>
-              <a href="tel:+420777123456">+420 777 123 456</a><br>
+              <a href="tel:+420725255665">+420 725 255 665</a><br>
               <a href="mailto:info@dugisburger.cz">info@dugisburger.cz</a><br>
-              <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook</a>
+              <a href="https://www.instagram.com/dugisburger/" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.facebook.com/profile.php?id=61576009757091" target="_blank" rel="noopener">Facebook</a>
             </p>
           </div>
         </div>
 
         <div class="map">
-          <!-- ZMĚŇ: v adrese za "q=" nahraď "Zlín" přesnou adresou restaurace -->
-          <iframe
-            src="https://www.google.com/maps?q=Zl%C3%ADn&output=embed"
+                    <iframe
+            src="https://www.google.com/maps?q=Dugi%27s%20Burger%2C%20Jana%20Anton%C3%ADna%20Bati%205645%2C%20760%2001%20Zl%C3%ADn&output=embed"
             title="Mapa s polohou Dugi's Burger"
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
