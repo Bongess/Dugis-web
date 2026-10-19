@@ -630,6 +630,18 @@ h1, h2, h3, h4 { margin: 0; }
   color-scheme: dark;
 }
 .field textarea { resize: vertical; }
+/* iOS Safari kreslí pole s datem po svém: ignoruje šířku, centruje text
+   a prázdné pole má jinou výšku. Srovnáme ho s ostatními poli. */
+.field input[type="date"] {
+  -webkit-appearance: none;
+  appearance: none;
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+  min-height: calc(1.6em + 30px);
+  text-align: left;
+}
+.field input[type="date"]::-webkit-date-and-time-value { text-align: left; margin: 0; }
 .field input::placeholder, .field textarea::placeholder { color: #5f5a50; }
 .field input:focus, .field select:focus, .field textarea:focus {
   outline: none;
