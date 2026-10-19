@@ -5,7 +5,7 @@
  */
 
 // ===== NASTAVENÍ – ZMĚŇ =====
-const TO_EMAIL   = 'info@dugisburger.cz';      // kam budou chodit dotazy a rezervace
+const TO_EMAIL   = 'tomas210408@gmail.com';      // kam budou chodit dotazy a rezervace
 const FROM_EMAIL = 'web@dugisburger.cz';       // odesílatel – ideálně adresa na stejné doméně jako web
 // ============================
 
